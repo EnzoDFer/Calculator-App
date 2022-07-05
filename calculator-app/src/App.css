@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  border: 1px solid rgb(255, 255, 255);
+  background: rgba(10, 10, 10, 0.801);
+  height: 80vh;
+  width: 80vw;
+  padding: 20px;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 2fr; 
+  gap: 10px 10px; 
+  border-radius: 8px;
+}
+
+.screen {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  background: black;
+  display: grid; 
+  grid-template-columns: 0.8fr 1.2fr; 
+  grid-template-rows: repeat(2, 1fr); 
+  gap: 10px 10px; 
+  grid-template-areas: 
+    ". storage"
+    "result result"; 
+  color: white;
+  text-align: right;
+  padding: 7px;
+}
+
+.storage { 
+  grid-area: storage;  
+}
+
+.result { 
+  grid-area: result; 
+  font-size: 2em;
+}
+
+.interactables {  
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px 10px;
+  grid-template-areas: 
+  ". . . . . . ."
+  ". . . digits digits digits ."
+  ". . . digits digits digits ."
+  ". . . digits digits digits ."
+  ". . . digits digits digits ."; 
+}
+
+.digits {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  grid-template-rows: repeat(4, 1fr); 
+  gap: 10px 10px; 
+  grid-area: digits; 
+}
+
+.digits > button {
+  background: rgb(61, 61, 61);
+}
+
+button {
+  all: unset;
+  text-align: center;
+  border-radius: 4px;
+  background: gray;
+  border: 1px solid white;
+}
+
+button:hover {
+  background-color: rgb(175, 175, 175);
+}
