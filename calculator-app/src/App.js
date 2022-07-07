@@ -19,44 +19,57 @@ function reducer(state,action) {
         ...state,
         activeNum: "",
         inactiveNum: "",
+        operation: null,
+        operationSymbol: '',
       }
-      case 'clear_entry':
+    case 'clear_entry':
+      return {
+        ...state,
+        activeNum: '',
+      }
+    case 'operation':
+      if (!state.inactiveNum) {
+        return {
+          ...state,
+          inactiveNum: state.activeNum,
+          activeNum: '',
+          operation: action.payload.mathFunction,
+          operationSymbol: action.payload.symbol,
+        }
+      }
+      else if (!state.activeNum && state.inactiveNum){
         return {
           ...state,
           activeNum: '',
+          operation: action.payload.mathFunction,
+          operationSymbol: action.payload.symbol,
         }
-      case 'operation':
-        if (state.activeNum!=='') {
-          return {
-            ...state,
-            inactiveNum: state.activeNum,
-            activeNum: '',
-            operation: action.payload.mathFunction,
-          }
-        }
-        return state;
-      case 'equals':
-        if (state.activeNum && state.inactiveNum) return {
-          ...state,
-          inactiveNum: state.operation(state.activeNum,state.inactiveNum),
-          activeNum: '',
-        }
-        else return state;
+      }
+      return state;
+    case 'equals':
+      if (state.activeNum && state.inactiveNum) return {
+        ...state,
+        inactiveNum: state.operation(state.activeNum,state.inactiveNum),
+        activeNum: '',
+        operation: null,
+        operationSymbol: '',
+      }
+      else return state;
   }
 }
 
 const initialState = {
   activeNum:'',
   inactiveNum:'',
-  operation: null,
+  operation: '',
 };
 
 const App = () => {
-  const [{activeNum,inactiveNum,operation},dispatch] = useReducer(reducer,initialState);
+  const [{activeNum,inactiveNum,operation,operationSymbol},dispatch] = useReducer(reducer,initialState);
 
   return (
     <div className="container">
-      <Screen active={activeNum} inactive={inactiveNum} operation={operation}/>
+      <Screen active={activeNum} inactive={inactiveNum} operationSymbol={operationSymbol}/>
       <div className="interactables">
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
@@ -80,7 +93,7 @@ const App = () => {
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'13'})} value={'13'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'14'})} value={'14'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'15'})} value={'15'}/>
-        <DigitButton onClick={()=>dispatch({type: 'clear_en try', payload:'CE'})} value={'CE'}/>
+        <DigitButton onClick={()=>dispatch({type: 'clear_entry', payload:'CE'})} value={'CE'}/>
         <div className="digits">
           <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'7'})} value={'7'}/>
           <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'8'})} value={'8'}/>
