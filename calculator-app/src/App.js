@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { sum,add,subtract,multiply,power,factorial } from './calculator_functions';
+import { sum,add,subtract,multiply,divide,power,factorial } from './calculator_functions';
 import './App.css';
 import Screen from './Screen';
 import DigitButton from './DigitButton';
@@ -10,6 +10,7 @@ import OperationButton from './OperationButton';
 function reducer(state,action) {
   switch (action.type) {
     case 'add_digit':
+      if (state.inactiveNum&&!state.operationSymbol) return state;
       return {
         ...state, 
         activeNum: `${state.activeNum || ''}${action.payload}`
@@ -49,7 +50,7 @@ function reducer(state,action) {
     case 'equals':
       if (state.activeNum && state.inactiveNum) return {
         ...state,
-        inactiveNum: state.operation(state.activeNum,state.inactiveNum),
+        inactiveNum: state.operation(state.inactiveNum,state.activeNum),
         activeNum: '',
         operation: null,
         operationSymbol: '',
@@ -77,15 +78,15 @@ const App = () => {
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'('})} value={'('}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:')'})} value={')'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: multiply,symbol:'*'}})} operation={'*'}/>
-        <OperationButton onClick={()=>dispatch({type: 'add_digit', payload:'-'})} operation={'-'}/>
+        <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: subtract,symbol:'-'}})} operation={'-'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'3'})} value={'3'}/>
-        <OperationButton onClick={()=>dispatch({type: 'add_digit', payload:'+'})} operation={'+'}/>
+        <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: add,symbol:'+'}})} operation={'+'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'5'})} value={'5'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'6'})} value={'6'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'7'})} value={'7'}/>
-        <OperationButton onClick={()=>dispatch({type: 'add_digit', payload:'/'})} operation={'/'}/>
+        <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: divide,symbol:'/'}})} operation={'/'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'9'})} value={'9'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'10'})} value={'10'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'11'})} value={'11'}/>

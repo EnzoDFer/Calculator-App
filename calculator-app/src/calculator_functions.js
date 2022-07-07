@@ -1,10 +1,14 @@
 export const add = function(a,b) {
-	return a+b;
+	return parseFloat(a)+parseFloat(b);
 };
 
 export const subtract = function(a,b) {
 	return a-b;
 };
+
+export const divide = function(a,b) {
+  return a/b;
+}
 
 export const sum = function(anArray) {
 	return anArray.reduce((num,currentTotal)=>currentTotal+num);
