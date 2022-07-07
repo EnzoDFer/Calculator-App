@@ -56,6 +56,12 @@ function reducer(state,action) {
         operationSymbol: '',
       }
       else return state;
+    case 'add_decimal':
+      if ((state.activeNum).includes('.')) return state;
+      return {
+        ...state,
+        activeNum: `${state.activeNum || ''}${action.payload}`,
+      }
   }
 }
 
@@ -106,7 +112,7 @@ const App = () => {
           <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
           <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'3'})} value={'3'}/>
           <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'0'})} value={'0'}/>
-          <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'.'})} value={'.'}/>
+          <DigitButton onClick={()=>dispatch({type: 'add_decimal', payload:'.'})} value={'.'}/>
           <DigitButton onClick={()=>dispatch({type: 'equals'})} value={'='}/>
         </div>
       </div>
