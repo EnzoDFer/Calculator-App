@@ -1,12 +1,9 @@
-import { useState } from "react";
-
-const Screen = ({activePhrase}) => {
-  //const [activePhrase,setActivePhrase] = useState('');
+const Screen = ({active,inactive,operation}) => {
 
   return (
     <div className="screen">
-      <div className="storage">Previous Number</div>
-      <div className="result">{activePhrase}</div>
+      <div className="storage">{inactive}{operation}</div>
+      <div className="result">{active}</div>
     </div>
   );
 }

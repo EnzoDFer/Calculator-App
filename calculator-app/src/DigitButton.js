@@ -1,6 +1,6 @@
 const DigitButton = ({onClick,value}) => {
   return (
-    <button onClick={()=>onClick(value)}>{value}</button>
+    <button onClick={onClick}>{value}</button>
   );
 }
 
