@@ -37,7 +37,7 @@ function reducer(state,action) {
           operation: action.payload.mathFunction,
           operationSymbol: action.payload.symbol,
         }
-      }
+      }  
       else if (!state.activeNum && state.inactiveNum){
         return {
           ...state,
@@ -45,6 +45,13 @@ function reducer(state,action) {
           operation: action.payload.mathFunction,
           operationSymbol: action.payload.symbol,
         }
+      }
+      return state;
+    case 'instantOperation':
+      if (state.activeNum && !state.inactiveNum) return {
+        ...state,
+        inactiveNum: action.payload.mathFunction(state.activeNum),
+        activeNum: '',
       }
       return state;
     case 'equals':
@@ -56,12 +63,20 @@ function reducer(state,action) {
         operationSymbol: '',
       }
       else return state;
+    case 'negate':
+      if (!state.activeNum) return state;
+      return {
+        ...state,
+        activeNum: state.activeNum*-1,
+      }
     case 'add_decimal':
       if ((state.activeNum).includes('.')) return state;
       return {
         ...state,
         activeNum: `${state.activeNum || ''}${action.payload}`,
       }
+    default:
+      throw new Error(`Error unknown action.type: ${action.type}`)
   }
 }
 
@@ -69,6 +84,7 @@ const initialState = {
   activeNum:'',
   inactiveNum:'',
   operation: '',
+  operationSymbol: '',
 };
 
 const App = () => {
@@ -87,11 +103,11 @@ const App = () => {
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: subtract,symbol:'-'}})} operation={'-'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'3'})} value={'3'}/>
+        <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.sqrt,symbol:'√'}})} value={'√'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: add,symbol:'+'}})} operation={'+'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'5'})} value={'5'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'6'})} value={'6'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'7'})} value={'7'}/>
+        <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.log,symbol:'log'}})} value={'log'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: divide,symbol:'/'}})} operation={'/'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'9'})} value={'9'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'10'})} value={'10'}/>
@@ -99,7 +115,7 @@ const App = () => {
         <DigitButton onClick={()=>dispatch({type: 'all_clear', payload:'AC'})} value={'AC'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'13'})} value={'13'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'14'})} value={'14'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'15'})} value={'15'}/>
+        <DigitButton onClick={()=>dispatch({type: 'negate'})} value={'+/-'}/>
         <DigitButton onClick={()=>dispatch({type: 'clear_entry', payload:'CE'})} value={'CE'}/>
         <div className="digits">
           <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'7'})} value={'7'}/>
