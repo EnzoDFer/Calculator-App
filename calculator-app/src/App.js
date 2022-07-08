@@ -18,22 +18,22 @@ function reducer(state,action) {
     case 'all_clear':
       return {
         ...state,
-        activeNum: "",
-        inactiveNum: "",
+        activeNum: null,
+        inactiveNum: null,
         operation: null,
-        operationSymbol: '',
+        operationSymbol: null,
       }
     case 'clear_entry':
       return {
         ...state,
-        activeNum: '',
+        activeNum: null,
       }
     case 'operation':
       if (!state.inactiveNum) {
         return {
           ...state,
           inactiveNum: state.activeNum,
-          activeNum: '',
+          activeNum: null,
           operation: action.payload.mathFunction,
           operationSymbol: action.payload.symbol,
         }
@@ -41,7 +41,7 @@ function reducer(state,action) {
       else if (!state.activeNum && state.inactiveNum){
         return {
           ...state,
-          activeNum: '',
+          activeNum: null,
           operation: action.payload.mathFunction,
           operationSymbol: action.payload.symbol,
         }
@@ -50,17 +50,17 @@ function reducer(state,action) {
     case 'instantOperation':
       if (state.activeNum && !state.inactiveNum) return {
         ...state,
-        inactiveNum: action.payload.mathFunction(state.activeNum),
-        activeNum: '',
+        inactiveNum: Number(action.payload.mathFunction(state.activeNum).toFixed(5)),
+        activeNum: null,
       }
       return state;
     case 'equals':
       if (state.activeNum && state.inactiveNum) return {
         ...state,
         inactiveNum: state.operation(state.inactiveNum,state.activeNum),
-        activeNum: '',
+        activeNum: null,
         operation: null,
-        operationSymbol: '',
+        operationSymbol: null,
       }
       else return state;
     case 'negate':
@@ -79,8 +79,8 @@ function reducer(state,action) {
       if (!state.activeNum) return {
         ...state,
         activeNum: state.inactiveNum,
-        inactiveNum: '',
-        operationSymbol: '',
+        inactiveNum: null,
+        operationSymbol: null,
       }
       return state;
     default:
@@ -89,10 +89,10 @@ function reducer(state,action) {
 }
 
 const initialState = {
-  activeNum:'',
-  inactiveNum:'',
-  operation: '',
-  operationSymbol: '',
+  activeNum: null,
+  inactiveNum: null,
+  operation: null,
+  operationSymbol: null,
 };
 
 const App = () => {

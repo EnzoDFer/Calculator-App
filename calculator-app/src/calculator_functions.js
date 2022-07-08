@@ -1,5 +1,7 @@
 export const add = function(a,b) {
-	return parseFloat(a).toFixed(5)+parseFloat(b).toFixed(5);
+  let result = +a + +b;
+  if (!Number.isInteger(result)) return result.toFixed(5);
+  return Number(result);
 };
 
 export const subtract = function(a,b) {
