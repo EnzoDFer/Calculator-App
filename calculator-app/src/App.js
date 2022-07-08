@@ -104,7 +104,7 @@ const App = () => {
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: factorial}})} value={'!'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'('})} value={'('}/>
+        <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: power,symbol:'^'}})} operation={'xⁿ'}/>
         <DigitButton onClick={()=>dispatch({type: 'previous'})} value={'↓'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: multiply,symbol:'*'}})} operation={'*'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: subtract,symbol:'-'}})} operation={'-'}/>
