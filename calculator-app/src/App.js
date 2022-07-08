@@ -48,10 +48,9 @@ function reducer(state,action) {
       }
       return state;
     case 'instantOperation':
-      if (state.activeNum && !state.inactiveNum) return {
+      if (state.activeNum) return {
         ...state,
-        inactiveNum: Number(action.payload.mathFunction(state.activeNum).toFixed(5)),
-        activeNum: null,
+        activeNum: Number(action.payload.mathFunction(state.activeNum).toFixed(5)),
       }
       return state;
     case 'equals':
@@ -104,7 +103,7 @@ const App = () => {
       <div className="interactables">
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'3'})} value={'3'}/>
+        <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: factorial}})} value={'!'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'('})} value={'('}/>
         <DigitButton onClick={()=>dispatch({type: 'previous'})} value={'↓'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: multiply,symbol:'*'}})} operation={'*'}/>
