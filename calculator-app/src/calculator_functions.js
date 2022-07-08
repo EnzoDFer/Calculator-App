@@ -1,5 +1,5 @@
 export const add = function(a,b) {
-	return parseFloat(a)+parseFloat(b);
+	return parseFloat(a).toFixed(5)+parseFloat(b).toFixed(5);
 };
 
 export const subtract = function(a,b) {
