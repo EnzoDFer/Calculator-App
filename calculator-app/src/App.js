@@ -114,7 +114,7 @@ const App = () => {
         <DigitButton onClick={()=>dispatch({type: 'previous'})} value={'↓'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: multiply,symbol:'*'}})} operation={'*'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: subtract,symbol:'-'}})} operation={'-'}/>
-        <nav className="dropdown">
+        <nav className="dropdown math-constants">
           MATH CONSTANTS
           <div className="dropdown-content">
             <DigitButton onClick={()=>dispatch({type: 'constant', payload:Math.PI})} value={'π'}/>
@@ -123,8 +123,14 @@ const App = () => {
         </nav>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.sqrt,symbol:'√'}})} value={'√'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: add,symbol:'+'}})} operation={'+'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'5'})} value={'5'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'6'})} value={'6'}/>
+        <nav className="dropdown trig-functions">
+          TRIG FUNCTIONS
+          <div className="dropdown-content">
+            <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.sin}})} value={'sin'}/>
+            <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.cos}})} value={'cos'}/>
+            <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.tan}})} value={'tan'}/>
+          </div>
+        </nav>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.log10,symbol:'log'}})} value={'log'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: divide,symbol:'/'}})} operation={'/'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'9'})} value={'9'}/>

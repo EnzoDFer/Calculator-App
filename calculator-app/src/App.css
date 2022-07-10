@@ -52,13 +52,20 @@ ul, li {
   grid-template-areas: 
   ". . . . . . ."
   "dropDown1 dropDown1 . digits digits digits ."
-  ". . . digits digits digits ."
+  "dropDown2 dropDown2 . digits digits digits ."
   ". . . digits digits digits ."
   ". . . digits digits digits ."; 
 }
 
-.dropdown {
+.math-constants {
   grid-area: dropDown1;
+}
+
+.trig-functions {
+  grid-area: dropDown2;
+}
+
+.dropdown {
   display: grid; 
   grid-template-columns: 1fr; 
   grid-template-rows: 1fr; 
@@ -72,6 +79,7 @@ ul, li {
 }
 
 .dropdown-content { 
+  z-index: 2;
   position: absolute;
   visibility: hidden;
   opacity: 0;
