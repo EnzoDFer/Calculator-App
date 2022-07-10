@@ -31,3 +31,15 @@ export const factorial = function(num) {
   }
   return result;
 };
+
+export const modulus = function(a,b) {
+  return a % b;
+}
+
+export const inverse = function(num){
+  return 1/num;
+}
+
+export const convertToPercent = function(num) {
+  return num * 100;
+}

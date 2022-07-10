@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { sum,add,subtract,multiply,divide,power,factorial } from './calculator_functions';
+import { inverse,add,subtract,multiply,divide,power,factorial, modulus, convertToPercent } from './calculator_functions';
 import './App.css';
 import Screen from './Screen';
 import DigitButton from './DigitButton';
@@ -62,8 +62,8 @@ function reducer(state,action) {
     case 'equals':
       if (state.activeNum && state.inactiveNum) return {
         ...state,
-        inactiveNum: state.operation(state.inactiveNum,state.activeNum),
-        activeNum: null,
+        activeNum: state.operation(state.inactiveNum,state.activeNum),
+        inactiveNum: null,
         operation: null,
         operationSymbol: null,
       }
@@ -107,8 +107,9 @@ const App = () => {
     <div className="container">
       <Screen active={activeNum} inactive={inactiveNum} operationSymbol={operationSymbol}/>
       <div className="interactables">
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
+        <div className="title">
+          <span className='title-main'>Scientific Calculator</span> by Enzodfer
+        </div>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: factorial}})} value={'!'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: power,symbol:'^'}})} operation={'xⁿ'}/>
         <DigitButton onClick={()=>dispatch({type: 'previous'})} value={'↓'}/>
@@ -133,12 +134,12 @@ const App = () => {
         </nav>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.log10,symbol:'log'}})} value={'log'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: divide,symbol:'/'}})} operation={'/'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'9'})} value={'9'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'10'})} value={'10'}/>
+        <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.trunc,}})} value={'trunc'}/>
+        <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: convertToPercent}})} value={'ANS in %'}/>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.log,}})} value={'ln'}/>
         <DigitButton onClick={()=>dispatch({type: 'all_clear', payload:'AC'})} value={'AC'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'13'})} value={'13'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'14'})} value={'14'}/>
+        <DigitButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: modulus, symbol: '%'}})} value={'mod'}/>
+        <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: inverse}})} value={'1/x'}/>
         <DigitButton onClick={()=>dispatch({type: 'negate'})} value={'+/-'}/>
         <DigitButton onClick={()=>dispatch({type: 'clear_entry', payload:'CE'})} value={'CE'}/>
         <div className="digits">

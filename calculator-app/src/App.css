@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@500&family=Smooch&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -50,11 +51,22 @@ ul, li {
   grid-template-rows: repeat(5, 1fr);
   gap: 10px 10px;
   grid-template-areas: 
-  ". . . . . . ."
+  "title title . . . . ."
   "dropDown1 dropDown1 . digits digits digits ."
   "dropDown2 dropDown2 . digits digits digits ."
   ". . . digits digits digits ."
   ". . . digits digits digits ."; 
+}
+
+.title {
+  grid-area: title;
+  font-family: 'Edu VIC WA NT Beginner', sans serif;
+  color: white;
+  text-shadow: 1px 1px gray;
+}
+
+.title-main {
+  font-size: 2rem;
 }
 
 .math-constants {
