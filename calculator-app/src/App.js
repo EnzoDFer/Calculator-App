@@ -108,8 +108,12 @@ const App = () => {
         <DigitButton onClick={()=>dispatch({type: 'previous'})} value={'↓'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: multiply,symbol:'*'}})} operation={'*'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: subtract,symbol:'-'}})} operation={'-'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
-        <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'2'})} value={'2'}/>
+        <ul className="dropdown">
+          MATH CONSTANTS
+          <li className="dropdown-menu">
+            <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'1'})} value={'1'}/>
+          </li>
+        </ul>
         <DigitButton onClick={()=>dispatch({type: 'instantOperation', payload:{mathFunction: Math.sqrt,symbol:'√'}})} value={'√'}/>
         <OperationButton onClick={()=>dispatch({type: 'operation', payload:{mathFunction: add,symbol:'+'}})} operation={'+'}/>
         <DigitButton onClick={()=>dispatch({type: 'add_digit', payload:'5'})} value={'5'}/>

@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+ul, li {
+  all: unset;
+}
+
 .container {
   border: 1px solid rgb(255, 255, 255);
   background: rgba(10, 10, 10, 0.801);
@@ -47,10 +51,53 @@
   gap: 10px 10px;
   grid-template-areas: 
   ". . . . . . ."
-  ". . . digits digits digits ."
+  "dropDown1 dropDown1 . digits digits digits ."
   ". . . digits digits digits ."
   ". . . digits digits digits ."
   ". . . digits digits digits ."; 
+}
+
+.dropdown {
+  grid-area: dropDown1;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px;
+  background:gray;
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid white;
+}
+
+.dropdown-menu { 
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.25s ease;
+  left: 0;
+  top:100%;
+  border:1px solid black;
+  background: gray;
+}
+
+.dropdown:hover  .dropdown-menu {
+  cursor: pointer;
+  visibility: visible;
+  opacity: 1;
+  display:block;
+  left: 0;
+}
+
+.dropdown li {
+  height: 50%;
+  width: 100%;
+  margin-left: -2px;
+}
+
+.dropdown-menu:hover {
+  background-color: rgb(175, 175, 175)
 }
 
 .digits {
@@ -75,4 +122,9 @@ button {
 
 button:hover {
   background-color: rgb(175, 175, 175);
+}
+
+.dropdown-menu button {
+  height: 100%;
+  width: 100%;
 }
