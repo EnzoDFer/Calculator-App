@@ -71,7 +71,7 @@ ul, li {
   border: 1px solid white;
 }
 
-.dropdown-menu { 
+.dropdown-content { 
   position: absolute;
   visibility: hidden;
   opacity: 0;
@@ -82,7 +82,7 @@ ul, li {
   background: gray;
 }
 
-.dropdown:hover  .dropdown-menu {
+.dropdown:hover  .dropdown-content {
   cursor: pointer;
   visibility: visible;
   opacity: 1;
@@ -90,13 +90,13 @@ ul, li {
   left: 0;
 }
 
-.dropdown li {
+.dropdown div {
   height: 50%;
   width: 100%;
   margin-left: -2px;
 }
 
-.dropdown-menu:hover {
+.dropdown-content:hover {
   background-color: rgb(175, 175, 175)
 }
 
@@ -124,7 +124,7 @@ button:hover {
   background-color: rgb(175, 175, 175);
 }
 
-.dropdown-menu button {
+.dropdown-content button {
   height: 100%;
   width: 100%;
 }
